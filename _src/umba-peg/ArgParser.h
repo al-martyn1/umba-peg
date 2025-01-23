@@ -7,7 +7,7 @@
 #include "umba/cli_tool_helpers.h"
 #include "umba/shellapi.h"
 #include "umba/string_plus.h"
-#include "app_ver_config.h"
+#include "AppVerConfig.h"
 
 //
 #include "marty_cpp/src_normalization.h"
