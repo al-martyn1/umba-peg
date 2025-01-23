@@ -12,6 +12,9 @@
 
 //
 #include "umba/tokenizer.h"
+//
+#include "umba/tokenizer/tokenizer_log.h"
+#include "umba/tokenizer/tokenizer_log_console.h"
 
 
 
