@@ -14,7 +14,7 @@
 #include "umba/string_plus.h"
 
 //
-#include "protogen-tokens.h"
+//#include "protogen-tokens.h"
 
 
 
@@ -65,8 +65,9 @@ makeTokenizerBuilderPeg()
                           .addBrackets(make_string<StringType>("[]"), UMBA_TOKENIZER_TOKEN_SQUARE_BRACKETS)
 
 
-                          .addSingleLineComment(make_string<StringType>("//"), UMBA_TOKENIZER_TOKEN_OPERATOR_SINGLE_LINE_COMMENT_FIRST)
-                          .setMultiLineComment(make_string<StringType>("/*"), make_string<StringType>("*/"))
+                          .addSingleLineComment(make_string<StringType>("#"), UMBA_TOKENIZER_TOKEN_OPERATOR_SINGLE_LINE_COMMENT_FIRST)
+                          // .addSingleLineComment(make_string<StringType>("//"), UMBA_TOKENIZER_TOKEN_OPERATOR_SINGLE_LINE_COMMENT_FIRST)
+                          // .setMultiLineComment(make_string<StringType>("/*"), make_string<StringType>("*/"))
 
 
                           // Операторы # и ## доступны только внутри директивы define препроцессора.
@@ -144,14 +145,16 @@ makeTokenizerBuilderPeg()
 struct PegTokenizerConfigurator
 {
     template<typename TokenizerType>
-    void operator()(TokenizerType &tokenizer)
+    TokenizerType operator()(TokenizerType tokenizer)
     {
         auto options = tokenizer.getOptions();
         options.unclassifiedCharsRaw = false;
         tokenizer.setOptions(options);
 
         // !!! Фильтры, установленные позже, отрабатывают раньше
-    
+
+
+        return tokenizer;
     }
 };
 
@@ -174,7 +177,7 @@ typename TokenizerBuilder::tokenizer_type makeTokenizerPeg(TokenizerBuilder buil
     tokenizer.tokenHandler = tokenHandler;
 
 
-    PegTokenizerConfigurator()(tokenizer);
+    return PegTokenizerConfigurator()(tokenizer);
 
     
     #if 0
@@ -237,7 +240,6 @@ typename TokenizerBuilder::tokenizer_type makeTokenizerPeg(TokenizerBuilder buil
     // Сбрасываем операторный флаг для символа '#'
     // tokenizer.setResetCharClassFlags('#', umba::tokenizer::CharClass::none, umba::tokenizer::CharClass::opchar); // Ничего не устанавливаем, сбрасываем opchar
 
-    return tokenizer;
 }
 
 
