@@ -15,14 +15,15 @@
 --exclude-files=*/*.ico
 --exclude-files=*/*.zip
 
-#--exclude-dir=encoding
-#--exclude-dir=marty_cpp
-#--exclude-dir=marty_tr
-#--exclude-dir=marty_utf
+--exclude-dir=encoding
+--exclude-dir=marty_cpp
+--exclude-dir=marty_decimal
+--exclude-dir=marty_tr
+--exclude-dir=marty_utf
 #--exclude-dir=marty_yaml_toml_json
 #--exclude-dir=nlohmann
 #--exclude-dir=yaml-cpp
-#--exclude-dir=sfmt
-#--exclude-dir=umba
-#--exclude-dir=marty_decimal
+--exclude-dir=sfmt
+--exclude-dir=umba
+#--exclude-dir=umba-peg
 

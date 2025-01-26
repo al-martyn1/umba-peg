@@ -3,4 +3,8 @@ Title: Brief Description for Project Sources
 Generator: Umba Brief Scanner
 ---
 
-- `umba-template.cpp` - 
+- `umba-peg-test-001.cpp` - Тест коллекции токенов с ленивым фетчем токенов. Выводим статистику по символам и токенам
+- `umba-peg-test-002.cpp` - Тест коллекции токенов с ленивым фетчем токенов, тестируем откат
+- `umba-peg-test-003.cpp` - Тест коллекции токенов с ленивым фетчем токенов, тестируем откат
+- `umba-peg-test-tpl.cpp` - 
+- `umba-peg.cpp` - 
