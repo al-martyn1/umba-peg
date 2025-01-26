@@ -1,5 +1,5 @@
 /*! \file
-    \brief Тест коллекции токенов с ленивым фетчем токенов. Выводим статистику по символам и токенам
+    \brief Тест коллекции токенов с ленивым фетчем токенов, тестируем откат
  */
 
 // Должна быть первой
@@ -133,7 +133,13 @@ UMBA_APP_MAIN()
                                                                , pFilenameSet->addFile(inputFilename)
                                                                );
 
-    for(;;)
+    std::size_t cnt = 0;
+
+    // Нулевой shiftVal - простое повторение предыдущего токена - 
+    // не забываем, что при считывании токена происходит автоматическое смещение указателя на следующий токен
+    std::size_t shiftVal = 0;
+
+    for(; ; ++cnt)
     {
         std::size_t tokenPos = 0;
         auto pTokenInfo = tokenCollection.getToken(&tokenPos);
@@ -145,7 +151,7 @@ UMBA_APP_MAIN()
 
         if (pTokenInfo->isTokenFin())
         {
-            std::cout << "Normal stop\n";
+            std::cout << "!!! Normal stop\n";
             break;
         }
 
@@ -154,28 +160,21 @@ UMBA_APP_MAIN()
                   << "]" 
                   << ", total fetched: " << tokenCollection.getNumFetchedTokens()
                   << ", idx: " << tokenPos
-                  // << ", cnt: " << cnt
-                  // << ", cnt%5: " << cnt%5
+                  << ", cnt: " << cnt
+                  << ", cnt%5: " << cnt%5
                   << "\n";
+
+
+        if (cnt && (cnt%5)==0) // Для теста делаем сдвиг назад и смотрим, что есть
+        {
+            std::cout << "--- Shift back by " << shiftVal << "\n";
+            tokenPos -= shiftVal;
+            tokenCollection.setTokenPos(tokenPos);
+        }
+
     }
     
     std::cout << "!!! Done\n";
-
-    std::cout << "\n";
-
-    std::cout << "Number of tokens    : " << tokenCollection.getNumberOfTokensTotal()    << "\n";
-    std::cout << "Bytes of tokens     : " << tokenCollection.getBytesOfTokensTotal()     << "\n";
-    std::cout << "Number of token data: " << tokenCollection.getNumberOfTokenDataTotal() << "\n";
-    std::cout << "Bytes of token data : " << tokenCollection.getBytesOfTokenDataTotal()  << "\n";
-    std::size_t tokenCollectionNumBytes = tokenCollection.getBytesOfTokensTotal()+tokenCollection.getBytesOfTokenDataTotal();
-    std::cout << "Bytes of tokenCollection: " << tokenCollectionNumBytes << "\n";
-    std::cout << "Bytes of input text     : " << inputText.size() << "\n";
-
-    if (!inputText.empty())
-    {
-        std::cout << "Tokens/Input size ratio: " << 100*tokenCollectionNumBytes/inputText.size() << "%\n";
-    }
-
 
     return 0;
 }

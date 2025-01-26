@@ -1,8 +1,8 @@
 # PEG парсеры - https://habr.com/ru/articles/471860/
 
 statement: assignment | expr | if_statement
-expr: expr '+' term | expr '-' term | term
-term: term '*' atom | term '/' atom | atom
+expr: term ('+' term | '-' term)*
+term: atom ('*' atom | '/' atom)*
 atom: NAME | NUMBER | '(' expr ')'
 assignment: target '=' expr
 target: NAME

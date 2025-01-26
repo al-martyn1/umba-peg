@@ -1,5 +1,5 @@
 /*! \file
-    \brief Тест коллекции токенов с ленивым фетчем токенов. Выводим статистику по символам и токенам
+    \brief Тест коллекции токенов с ленивым фетчем токенов, тестируем откат
  */
 
 // Должна быть первой
@@ -19,14 +19,16 @@
 #include "umba/char_writers.h"
 //#+sort
 
+#include "umba/filename_set.h"
+#include "umba/escape_string.h"
+
 //
 #include "umba/tokenizer.h"
 //
 #include "umba/tokenizer/tokenizer_log.h"
 #include "umba/tokenizer/tokenizer_log_console.h"
 #include "umba/tokenizer/token_collection.h"
-#include "umba/filename_set.h"
-#include "umba/escape_string.h"
+#include "umba/tokenizer/parser_base.h"
 //
 // #include "../fnset_stub.h"
 
@@ -70,6 +72,9 @@ UMBA_APP_MAIN()
     using TokenizerIteratorType         = typename TokenizerType::iterator_type;
     using TokenizerTokenParsedDataType  = typename TokenizerType::token_parsed_data_type;
     using TokenCollectionType           = umba::tokenizer::TokenCollection<TokenizerType>;
+    using ParserBase                    = umba::tokenizer::ParserBase<TokenizerType>;
+
+
 
 
 // template< typename PayloadType
@@ -132,11 +137,12 @@ UMBA_APP_MAIN()
                                                                , inputText
                                                                , pFilenameSet->addFile(inputFilename)
                                                                );
+    ParserBase parser = ParserBase(std::move(tokenCollection));
 
-    for(;;)
+    while(true)
     {
         std::size_t tokenPos = 0;
-        auto pTokenInfo = tokenCollection.getToken(&tokenPos);
+        auto pTokenInfo = parser.waitForSignificantToken(&tokenPos);
         if (!pTokenInfo)
         {
             std::cout << "Something goes wrong, pTokenInfo is null\n";
@@ -145,7 +151,7 @@ UMBA_APP_MAIN()
 
         if (pTokenInfo->isTokenFin())
         {
-            std::cout << "Normal stop\n";
+            std::cout << "!!! Normal stop\n";
             break;
         }
 
@@ -154,28 +160,10 @@ UMBA_APP_MAIN()
                   << "]" 
                   << ", total fetched: " << tokenCollection.getNumFetchedTokens()
                   << ", idx: " << tokenPos
-                  // << ", cnt: " << cnt
-                  // << ", cnt%5: " << cnt%5
                   << "\n";
     }
     
     std::cout << "!!! Done\n";
-
-    std::cout << "\n";
-
-    std::cout << "Number of tokens    : " << tokenCollection.getNumberOfTokensTotal()    << "\n";
-    std::cout << "Bytes of tokens     : " << tokenCollection.getBytesOfTokensTotal()     << "\n";
-    std::cout << "Number of token data: " << tokenCollection.getNumberOfTokenDataTotal() << "\n";
-    std::cout << "Bytes of token data : " << tokenCollection.getBytesOfTokenDataTotal()  << "\n";
-    std::size_t tokenCollectionNumBytes = tokenCollection.getBytesOfTokensTotal()+tokenCollection.getBytesOfTokenDataTotal();
-    std::cout << "Bytes of tokenCollection: " << tokenCollectionNumBytes << "\n";
-    std::cout << "Bytes of input text     : " << inputText.size() << "\n";
-
-    if (!inputText.empty())
-    {
-        std::cout << "Tokens/Input size ratio: " << 100*tokenCollectionNumBytes/inputText.size() << "%\n";
-    }
-
 
     return 0;
 }
