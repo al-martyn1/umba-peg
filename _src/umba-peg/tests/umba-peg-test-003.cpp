@@ -156,7 +156,7 @@ UMBA_APP_MAIN()
         }
 
         std::cout << getTokenKindString(pTokenInfo->getTokenType()) 
-                  << ": [" << umba::escapeStringC(pTokenInfo->getText()) 
+                  << ": [" << umba::escapeStringC(tokenCollection.getTokenText(pTokenInfo)) 
                   << "]" 
                   << ", total fetched: " << tokenCollection.getNumFetchedTokens()
                   << ", idx: " << tokenPos
