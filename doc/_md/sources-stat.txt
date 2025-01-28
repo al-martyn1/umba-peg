@@ -1,0 +1,44 @@
+github.com/AlDanial/cloc v 2.02  T=1.07 s (23.4 files/s, 1391.9 lines/s)
+---------------------------------------------------------------------------------
+File                                          blank        comment           code
+---------------------------------------------------------------------------------
+.\_src\umba-peg\ArgParser.h                      96             29            376
+.\_src\umba-peg\umba-peg.cpp                     42             46            114
+.\_src\umba-peg\peg_v1.h                         69             76            106
+.\README.md                                      51              0             87
+.\_src\umba-peg\utils.h                          28             12             64
+.\CMakeLists.txt                                 33             20             44
+.\_src\umba-peg\fnset_stub.h                     22              4             41
+.\deploy_local.bat                                1              0             20
+.\_precommit.bat                                  3              0             12
+.\_src\umba-peg\AppConfig.h                       7              2              9
+.\_src\umba-peg\log.h                             5              3              9
+.\_src\umba-peg\AppVerConfig.h                    3              0              8
+.\doc\Index.md                                    0              0              8
+.\.set_msvc.bat                                   0              0              6
+.\_gen-doc.bat                                    2              0              6
+.\_update_debug_conf.bat                          0              0              4
+.\doc.notes\README.md                             2              0              4
+.\.set_sln.bat                                    0              0              2
+.\.set_sln_exes.bat                               0              0              2
+.\_start_msvc.bat                                 0              0              2
+.\_gen-doc-wlog.bat                               0              0              1
+.\_precommit_wlog.bat                             0              0              1
+.\_start_code.bat                                 0              0              1
+.\_update_all.bat                                 0              0              1
+.\doc.notes\todo.md                               2              0              1
+---------------------------------------------------------------------------------
+SUM:                                            366            192            929
+---------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+C/C++ Header                     7            230            126            613
+C++                              1             42             46            114
+Markdown                         4             55              0            100
+DOS Batch                       12              6              0             58
+CMake                            1             33             20             44
+-------------------------------------------------------------------------------
+SUM:                            25            366            192            929
+-------------------------------------------------------------------------------

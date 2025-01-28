@@ -28,9 +28,8 @@
 
 В начале файла находим строку описания проекта (с директивой `project`):
 
-**CMakeLists.txt:2**
+**CMakeLists.txt:0**
 ```cmake
-project(umba-template VERSION 0.1.0 LANGUAGES C CXX)
 ```
 
 Заменяем название `umba-template` на название проекта.
@@ -87,10 +86,8 @@ set(COMMON_LIBS encoding::encoding marty_cpp::marty_cpp sfmt::sfmt umba::umba um
 
 Для открытия проекта в MSVC нужно настроить название "солюшена":
 
-**set_sln.bat:2**
-```
-@set SLN=umba-template
-```
+!!! File not found in: F:\_github\umba-tools\umba-peg, F:\_github\umba-tools\umba-peg\src
+#!insert{noLineNo,noKeepCutTags,filename,no-path} set_sln.bat#`@set SLN`-(1)
 
 Это название должно совпадать с тем, что указано в директиве `project` файла `CMakeLists.txt`.
 
