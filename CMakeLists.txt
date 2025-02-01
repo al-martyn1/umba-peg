@@ -60,7 +60,7 @@ if(WIN32) # Всё нормально, это про таргет
 endif()
 
 
-set(COMMON_UMBA_OPTIONS "BIGOBJ" "UTF8" "PEDANTIC" "WERR") # "PEDANTIC"/"WALL" "WERR"
+set(COMMON_UMBA_OPTIONS "BIGOBJ" "UTF8" "PEDANTIC" "WERR") # "PEDANTIC"/"WALL" "WERR" "NOWARNPACKALIGN"
 
 #[===[
 #]===]
