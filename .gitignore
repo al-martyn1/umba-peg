@@ -4,4 +4,4 @@
 *.user
 *.log
 /.set_msvc.bat
-/msg.txt
+/msg.*
